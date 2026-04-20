@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>讨论：韩国 Queer 文化的媒介表达</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lewislulu/html-ppt-skill/assets/base.css">
+    <link id="theme-link" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lewislulu/html-ppt-skill/assets/themes/tokyo-night.css">
+    <style>
+        body { background: #1a1b26; transition: 0.5s; overflow: hidden; }
+        .slide { 
+            display: none; 
+            height: 100vh; 
+            width: 100vw; 
+            padding: 60px; 
+            box-sizing: border-box;
+            animation: fadeIn 0.6s ease;
+        }
+        .is-active { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .content-center { text-align: center; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px; text-align: left; }
+        .bg-surface { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; }
+        .footer-hint { position: absolute; bottom: 20px; font-size: 0.8rem; opacity: 0.5; }
+    </style>
+</head>
+<body class="deck-container">
+
+    <section class="slide is-active">
+        <div class="content-center">
+            <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">亚文化、偶像工业与酷儿可见性</h1>
+            <h3 style="color: #7aa2f7;">—— 韩国社会语境下的 Queer 讨论</h3>
+            <p style="margin-top: 2rem; opacity: 0.8;">Presenter: Gemini & User</p>
+        </div>
+        <div class="footer-hint">按下 [ → ] 键翻页</div>
+    </section>
+
+    <section class="slide">
+        <h1 style="color: #bb9af7; border-bottom: 2px solid #bb9af7; padding-bottom: 10px;">社会背景：断裂的现状</h1>
+        <div class="grid-2">
+            <div class="bg-surface">
+                <h2 style="color: #7dcfff;">保守主义的围墙</h2>
+                <ul style="line-height: 1.8;">
+                    <li>强烈的儒家传统观念</li>
+                    <li>高度组织化的宗教反弹</li>
+                    <li>缺乏《反歧视法》制度保障</li>
+                </ul>
+            </div>
+            <div class="bg-surface">
+                <h2 style="color: #7dcfff;">数字缝隙</h2>
+                <p style="line-height: 1.6;">Queer 社区在网络空间展现出极高的活跃度，通过社交媒体构建了“线下的隐身，线上的发声”。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <div class="content-center">
+            <h1 style="color: #f7768e;">媒介焦点：K-pop 中的模糊性</h1>
+            <p style="font-size: 1.5rem; max-width: 800px; margin: 20px auto; line-height: 1.6;">
+                是“颠覆”还是“消费”？<br>
+                从妆造去性别化到“CP 文化”，工业化生产的酷儿元素如何影响现实认同？
+            </p>
+        </div>
+    </section>
+
+ <script>
+        let current = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        // --- 完整官方主题清单（从你的截图精准提取） ---
+        const themes = [
+            'tokyo-night', 'xiaohongshu-white', 'japanese-minimal', 'cyberpunk-neon',
+            'pitch-deck-vc', 'academic-paper', 'arctic-cool', 'aurora', 'bauhaus',
+            'blueprint', 'catppuccin-latte', 'catppuccin-mocha', 'corporate-clean',
+            'dracula', 'editorial-serif', 'engineering-whiteprint', 'glassmorphism',
+            'gruvbox-dark', 'magazine-bold', 'memphis-pop', 'midcentury', 
+            'minimal-white', 'neo-brutalism', 'news-broadcast', 'nord', 
+            'rainbow-gradient', 'retro-tv', 'rose-pine', 'sharp-mono', 
+            'soft-pastel', 'solarized-light', 'sunset-warm', 'swiss-grid',
+            'terminal-green', 'vaporwave', 'y2k-chrome'
+        ];
+        
+        let themeIndex = 0;
+        const themeLink = document.getElementById('theme-link');
+
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('is-active'));
+            slides[index].classList.add('is-active');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            const key = e.key.toLowerCase();
+            
+            // 翻页逻辑
+            if (key === 'arrowright' || key === ' ') {
+                current = (current + 1) % slides.length;
+                showSlide(current);
+            } else if (key === 'arrowleft') {
+                current = (current - 1 + slides.length) % slides.length;
+                showSlide(current);
+            }
+            
+            // 换色逻辑：按 T 键
+            else if (key === 't') {
+                themeIndex = (themeIndex + 1) % themes.length;
+                const newTheme = themes[themeIndex];
+                
+                // 重点：这里指向你本地的 assets/themes 文件夹
+                themeLink.href = `../../assets/themes/${newTheme}.css`;
+                
+                console.log('当前主题：' + newTheme);
+            }
+        });
+    </script>
+</body>
+</html>
